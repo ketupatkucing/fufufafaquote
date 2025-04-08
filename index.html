@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Multiple API Responses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: none;
+            word-break: break-all
+        }
+        .response-item {
+            margin-bottom: 10px;
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        #error {
+            color: red;
+            display: none;
+        }
+        img{
+          width: 100%;
+        }
+        h2 {
+          word-break: break-all
+        }
+    </style>
+</head>
+<body>
+  
+    <h1>DOGSLI FUFUFAFA RIL NO FEK FEK</h1>
+    <h2>Credit : <span><a href="https://github.com/vanirvan/fufufafa-quotes-fetcher">https://github.com/vanirvan/fufufafa-quotes-fetcher</a></span></h2>
+    <input type="text" id="contentInput" value="">
+    <button onclick="fetchData()">Cari Quote</button>
+    <div id="result">
+        <p id="loading" style="color: blue;">Loading...</p>
+        <div id="error"></div>
+        <div id="responses"></div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
