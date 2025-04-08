@@ -1,51 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doksli Fufufafa quote</title>
-    <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
         body {
             font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        #result {
-            margin-top: 20px;
             padding: 10px;
-            border: 1px solid #ccc;
-            display: none;
-            word-wrap : break-word;
         }
-        .response-item {
-            margin-bottom: 10px;
-            padding: 5px;
-            border-bottom: 1px solid #eee;
+        .dogsli {
+          display: flex;
+          flex-direction: column;
+          word-wrap: break-word;
+          padding: 0;
+          
+        
         }
-        #error {
-            color: red;
-            display: none;
-        }
+      
         img{
+          margin-top: 50px;
           width: 100%;
+          border-bottom : solid 1px #eee;
+          margin-bottom: 10px;
+        }
+        #quote-list{
+          border: 1px solid #ccc;
+          padding: 5px;
+       
         }
         h2 {
           word-break: break-all
         }
     </style>
+  <title>Quotes from Fufu Fafa</title>
 </head>
 <body>
-  
-    <h1>DOGSLI FUFUFAFA RIL NO FEK FEK</h1>
-    <h2>Credit : <span><a href="https://github.com/vanirvan/fufufafa-quotes-fetcher">https://github.com/vanirvan/fufufafa-quotes-fetcher</a></span></h2>
-    <input type="text" id="contentInput" value="">
-    <button onclick="fetchData()">Cari Quote</button>
-    <small>*kosongkan input kalau mau liat semua quotenya</small>
-    <div id="result">
-        <p id="loading" style="color: blue;">Loading...</p>
-        <div id="error"></div>
-        <div id="responses"></div>
-    </div>
+  <h1>DOGSLI FUFUFAFA RIL NO FEK FEK</h1>
+  <h2>Credit : <span><a href="https://github.com/vanirvan/fufufafa-quotes-fetcher">https://github.com/vanirvan/fufufafa-quotes-fetcher</a></span></h2>
+  <input type="text"id="ipt">
+   <button onclick="cari()">Cari Quote</button>
+   <div class="dogsli">
+     <p id="quote-list">. . .<p>
+   </div>
+ 
+  <script>
+    const url = "https://raw.githubusercontent.com/ketupatkucing/fufufafaquote/main/api.json";
+    const ipt = document.getElementById ('ipt')
+    const quoteList = document.getElementById("quote-list");
+    function cari(){
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
 
-    <script src="main.js"></script>
+          const cari = data.filter(quote =>
+            quote.content.toLowerCase().includes(ipt.value.toLowerCase())
+          );
+      
+          if (cari.length > 0) {
+            quoteList.textContent =''
+            cari.forEach(quote => {
+              const li = document.createElement("span");
+              const ss = document.createElement('img')
+              const x = document.createElement("A");
+              
+              const t = document.createTextNode(quote.doksli);
+
+              x.setAttribute("href", quote.doksli);
+              x.appendChild(t);
+             // li.textContent = `Quote : ${quote.content}`
+             li.textContent = 'Doksli : '
+              ss.src = quote.image_url
+              
+              quoteList.appendChild(ss)
+              quoteList.appendChild(li);
+              quoteList.appendChild(x)
+              
+            });
+          } else {
+            quoteList.textContent = "Doksli belum ditemukan";
+          }
+        })
+        .catch(error => {
+          quoteList.textContent = "Gagal loading quote";
+        });
+    }
+  </script>
 </body>
 </html>
