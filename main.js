@@ -55,7 +55,7 @@ function fetchData() {
     })
     .catch(error => {
       loadingP.style.display = 'none';
-      errorDiv.style.display = 'block'; // Show the error div
-      errorDiv.textContent = `Error: ${error.message}`; // Display the error message
+      errorDiv.style.display = 'block'; 
+      errorDiv.textContent = `Doksli belum ditemukan!`; 
     });
 }
