@@ -5,32 +5,163 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <style>
-        body {
+                * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
-            padding: 10px;
         }
-        .dogsli {
-          display: flex;
-          flex-direction: column;
-          word-wrap: break-word;
-          padding: 0;
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        a {
+          color: #00ffcc;
+          text-decoration: none;
           
-        
         }
-      
-        img{
-          margin-top: 50px;
-          width: 100%;
-          border-bottom : solid 1px #eee;
-          margin-bottom: 10px;
+        h1 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            text-align: center;
+            color: #00ffcc;
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+            margin-bottom: 1rem;
+            animation: glow 2s infinite alternate;
         }
-        #quote-list{
-          border: 1px solid #ccc;
-          padding: 5px;
-       
-        }
+
         h2 {
-          word-break: break-all
+            text-align: center;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            margin-bottom: 2rem;
+        }
+
+        h2 a {
+            color: #00ffcc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        h2 a:hover {
+            color: #ff00cc;
+            text-shadow: 0 0 5px rgba(255, 0, 204, 0.5);
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #ipt {
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            width: clamp(200px, 60%, 400px);
+            transition: all 0.3s ease;
+        }
+
+        #ipt:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            background: #00ffcc;
+            color: #1a1a1a;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #ff00cc;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(255, 0, 204, 0.5);
+            transform: translateY(-2px);
+        }
+
+        small {
+            display: block;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 10px;
+        }
+
+        .dogsli {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s ease-in;
+            word-wrap: break-word;
+        }
+
+        #quote-list {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .dogsli img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 15px;
+            transition: transform 0.3s ease;
+            margin-top: 30px;
+        }
+
+        .dogsli img:hover {
+            transform: scale(1.02);
+        }
+        .field-user {
+          display: flex;
+          justify-content: center;
+          gap: 10px;
+          
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(0, 255, 204, 0.5); }
+            to { text-shadow: 0 0 20px rgba(0, 255, 204, 0.8); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            .search-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            button {
+                width: 100%;
+                max-width: 200px;
+            }
+            small {
+              display: block;
+              text-align: start;
+              color: rgba(255, 255, 255, 0.7);
+              margin-top: 5px;
+            }
         }
     </style>
   <title>Quotes from Fufu Fafa</title>
@@ -38,12 +169,16 @@
 <body>
   <h1>DOGSLI FUFUFAFA RIL NO FEK FEK</h1>
   <h2>Credit : <span><a href="https://github.com/vanirvan/fufufafa-quotes-fetcher">https://github.com/vanirvan/fufufafa-quotes-fetcher</a></span></h2>
-  <input type="text"id="ipt">
+  <div class="field-user">
+    <input type="text"id="ipt">
    <button onclick="cari()">Cari Quote</button>
-  <br>
+   
+  </div>
+  
    <small>*kosongin kalo mau liat semua doksli</small>
    <div class="dogsli">
-     <p id="quote-list">. . .<p>
+     <div id="quote-list">. . .<div>
+     
    </div>
  
   <script>
@@ -51,41 +186,50 @@
     const ipt = document.getElementById ('ipt')
     const quoteList = document.getElementById("quote-list");
     function cari(){
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-
-          const cari = data.filter(quote =>
-            quote.content.toLowerCase().includes(ipt.value.toLowerCase())
-          );
-      
-          if (cari.length > 0) {
-            quoteList.textContent =''
-            cari.forEach(quote => {
-              const li = document.createElement("span");
-              const ss = document.createElement('img')
-              const x = document.createElement("A");
-              
-              const t = document.createTextNode(quote.doksli);
-
-              x.setAttribute("href", quote.doksli);
-              x.appendChild(t);
-             // li.textContent = `Quote : ${quote.content}`
-             li.textContent = 'Doksli : '
-              ss.src = quote.image_url
-              
-              quoteList.appendChild(ss)
-              quoteList.appendChild(li);
-              quoteList.appendChild(x)
-              
-            });
-          } else {
-            quoteList.textContent = "Doksli belum ditemukan";
-          }
-        })
-        .catch(error => {
-          quoteList.textContent = "Gagal loading quote";
-        });
+      quoteList.style.opacity = '0';
+      setTimeout(() => {
+        // Sample response - replace with actual quote fetching logic
+        quoteList.textContent = ipt.value ?
+          `Searching for: ${ipt.value}` :
+          'Showing all quotes...';
+        quoteList.style.opacity = '1';
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+        
+            const cari = data.filter(quote =>
+              quote.content.toLowerCase().includes(ipt.value.toLowerCase())
+            );
+        
+            if (cari.length > 0) {
+              quoteList.textContent = ''
+              cari.forEach(quote => {
+                const li = document.createElement("p");
+                const ss = document.createElement('img')
+                const x = document.createElement("A");
+        
+                const t = document.createTextNode(quote.doksli);
+        
+                x.setAttribute("href", quote.doksli);
+                x.appendChild(t);
+                // li.textContent = `Quote : ${quote.content}`
+                li.textContent = 'Doksli : '
+                ss.src = quote.image_url
+        
+                quoteList.appendChild(ss)
+               quoteList.appendChild(li);
+                quoteList.appendChild(x)
+        
+              });
+            } else {
+              quoteList.textContent = "Doksli belum ditemukan";
+            }
+          })
+          .catch(error => {
+            quoteList.textContent = "Gagal loading quote";
+          });
+      }, 300);
+    
     }
   </script>
 </body>
